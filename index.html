@@ -1,25 +1,196 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Maquette 3D en AR</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maquette Architecturale | Réalité Augmentée Professionnelle</title>
+    
+    <!-- Intégration optimisée de Model-Viewer -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer@^2.4.1/dist/model-viewer.min.js"></script>
+    
+    <!-- Police Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #333333;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        
+        .ar-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        model-viewer {
+            width: 100%;
+            height: 600px;
+            --poster-color: transparent;
+        }
+        
+        .ar-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .ar-button:hover {
+            background: var(--secondary-color);
+            transform: translateX(-50%) scale(1.05);
+        }
+        
+        .instructions {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Maquette Architecture</h1>
-    <p>Scannez le QR Code et ouvrez cette page sur mobile pour voir en AR.</p>
-
-    <!-- Afficher le modèle 3D -->
-    <model-viewer
-        src="maquette.glb"
-        ar
-        ar-modes="webxr scene-viewer quick-look"
-        camera-controls
-        alt="Maquette 3D"
-        style="width: 100%; height: 500px;">
+    <div class="container">
+        <header>
+            <h1>Maquette Architecturale 3D</h1>
+            <p class="subtitle">Visualisation en Réalité Augmentée Professionnelle</p>
+        </header>
         
-        <button slot="ar-button" style="background: white; border: none; padding: 10px; border-radius: 5px;">
-            👓 Voir en Réalité Augmentée
-        </button>
-    </model-viewer>
+        <div class="ar-container">
+            <model-viewer
+                src="maquette.glb"
+                alt="Maquette architecturale 3D interactive"
+                ar
+                ar-modes="webxr scene-viewer quick-look"
+                camera-controls
+                auto-rotate
+                shadow-intensity="1"
+                environment-image="neutral"
+                exposure="0.8"
+                interaction-prompt="none"
+                camera-orbit="0deg 75deg 105%"
+                camera-target="0m 0m 0m"
+                field-of-view="30deg">
+                
+                <button class="ar-button" slot="ar-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    Voir en Réalité Augmentée
+                </button>
+                
+                <div slot="loading">
+                    <div class="loading-spinner"></div>
+                </div>
+            </model-viewer>
+        </div>
+        
+        <div class="instructions">
+            <h3>Comment utiliser :</h3>
+            <ol>
+                <li>Scannez le QR Code avec votre smartphone</li>
+                <li>Ouvrez le lien dans Chrome (Android) ou Safari (iPhone)</li>
+                <li>Cliquez sur "Voir en Réalité Augmentée"</li>
+                <li>Pointez votre caméra vers une surface plane</li>
+            </ol>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <h3>🔍 Zoom & Rotation</h3>
+                <p>Interagissez avec le modèle en pinch-to-zoom et rotation à deux doigts</p>
+            </div>
+            <div class="feature-card">
+                <h3>📱 Multiplateforme</h3>
+                <p>Compatible avec tous les smartphones récents (iOS et Android)</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔄 Mises à jour en temps réel</h3>
+                <p>Le modèle 3D se met automatiquement à jour sans rechargement</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Votre Société | Tous droits réservés</p>
+            <p>Technologie WebAR powered by Google Model-Viewer</p>
+        </footer>
+    </div>
+    
+    <!-- Analytics optionnel -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
 </body>
 </html>
