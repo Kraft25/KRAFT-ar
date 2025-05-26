@@ -11,4 +11,4 @@ Ce projet permet d'afficher une maquette architecturale en AR via un QR Code.
 - `index.html` : Page web pour l'affichage  
 - `maquette.glb` : Modèle 3D  
 
-Créé par [Hoba Daniel] - 2024  
+Créé par [Hoba Daniel] - 2025  
